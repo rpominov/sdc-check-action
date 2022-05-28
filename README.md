@@ -21,6 +21,7 @@ jobs:
 
       - name: Run sdc-check
         uses: rpominov/sdc-check-action@v1
-        with:
-          todo: todo
 ```
+
+For extra cofiguration, add a `.sdccheckignore` file and an `"sdc-check"` section in `package.json`.
+See https://github.com/mbalabash/sdc-check#configure

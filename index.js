@@ -6,35 +6,27 @@
 import core from "@actions/core";
 import { check } from "sdc-check";
 
-const directory =
-  core.getInput("directory") == null || core.getInput("directory") === ""
+const root =
+  core.getInput("root") == null || core.getInput("root") === ""
     ? process.env.GITHUB_WORKSPACE
-    : core.getInput("directory");
-// const strategy = core.getInput("strategy");
-// const vulnerabilities = core.getInput("vulnerabilities");
-// const warnings = core.getInput("warnings");
-// const reporters = core.getInput("reporters");
-
-// console.log({
-//   inputDirectory: core.getInput("directory"),
-//   fallback: process.env.GITHUB_WORKSPACE,
-// });
+    : core.getInput("root");
 
 try {
-  const report = await check({ rootDir: directory });
+  const report = await check({ rootDir: root });
 
   if (report.type === "none") {
-    throw new Error("sdc-check internal error");
-  }
+    core.setFailed("Internal error");
+  } else {
+    printErrorsInfo(report.errors);
+    printWarningsInfo(report.warnings);
 
-  printErrorsInfo(report.errors);
-  printWarningsInfo(report.warnings);
-
-  if (report.type === "error") {
-    core.setFailed("sdc-check has found errors");
+    if (report.type === "error") {
+      core.setFailed("Errors found");
+    }
   }
 } catch (error) {
-  core.setFailed(`[UNCAUGHT_ERROR]: ${error.message}`);
+  console.error(error);
+  core.setFailed(error.message ?? "No message");
 }
 
 function printErrorsInfo(reportedItems) {
