@@ -6,7 +6,10 @@
 import core from "@actions/core";
 import { check } from "sdc-check";
 
-const directory = core.getInput("directory") && process.env.GITHUB_WORKSPACE;
+const directory =
+  core.getInput("directory") == null || core.getInput("directory") === ""
+    ? process.env.GITHUB_WORKSPACE
+    : core.getInput("directory");
 // const strategy = core.getInput("strategy");
 // const vulnerabilities = core.getInput("vulnerabilities");
 // const warnings = core.getInput("warnings");
