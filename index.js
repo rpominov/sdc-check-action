@@ -31,21 +31,20 @@ try {
 
 function printErrorsInfo(reportedItems) {
   if (reportedItems.length > 0) {
-    console.error(`Errors: ${reportedItems.length}`);
-    console.error(JSON.stringify(reportedItems, null, 2));
+    reportedItems.forEach(item => {
+      core.error(`${item.metric} in ${item.package}: ${item.message}`);
+    })
   } else {
-    core.info("Errors: 0");
+    core.info("No errors");
   }
 }
 
 function printWarningsInfo(reportedItems) {
   if (reportedItems.length > 0) {
     reportedItems.forEach(item => {
-      core.warning(`${item.package}: ${item.message}`);
+      core.warning(`${item.metric} in ${item.package}: ${item.message}`);
     })
-    // console.warn(`\nWarnings: ${reportedItems.length}`);
-    // console.warn(JSON.stringify(reportedItems, null, 2));
   } else {
-    core.info("\nWarnings: 0");
+    core.info("No warnings");
   }
 }
