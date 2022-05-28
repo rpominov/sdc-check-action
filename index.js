@@ -27,8 +27,8 @@ try {
     throw new Error("sdc-check internal error");
   }
 
-  printErrorsInfo(report.errors, cliOptions);
-  printWarningsInfo(report.warnings, cliOptions);
+  printErrorsInfo(report.errors);
+  printWarningsInfo(report.warnings);
 
   if (report.type === "error") {
     core.setFailed("sdc-check has found errors");
@@ -46,7 +46,7 @@ function printErrorsInfo(reportedItems) {
   }
 }
 
-function printWarningsInfo(reportedItems, cliOptions) {
+function printWarningsInfo(reportedItems) {
   if (reportedItems.length > 0) {
     console.warn(`\nWarnings: ${reportedItems.length}`);
     console.warn(JSON.stringify(reportedItems, null, 2));
