@@ -12,6 +12,11 @@ const directory = core.getInput("directory") ?? process.env.GITHUB_WORKSPACE;
 // const warnings = core.getInput("warnings");
 // const reporters = core.getInput("reporters");
 
+console.log({
+  inputDirectory: core.getInput("directory"),
+  fallback: process.env.GITHUB_WORKSPACE,
+});
+
 try {
   const report = await check({ rootDir: directory });
 
