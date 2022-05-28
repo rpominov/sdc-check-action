@@ -34,15 +34,18 @@ function printErrorsInfo(reportedItems) {
     console.error(`Errors: ${reportedItems.length}`);
     console.error(JSON.stringify(reportedItems, null, 2));
   } else {
-    console.log("Errors: 0");
+    core.info("Errors: 0");
   }
 }
 
 function printWarningsInfo(reportedItems) {
   if (reportedItems.length > 0) {
-    console.warn(`\nWarnings: ${reportedItems.length}`);
-    console.warn(JSON.stringify(reportedItems, null, 2));
+    reportedItems.forEach(item => {
+      core.warning(`${item.package}: ${item.message}`);
+    })
+    // console.warn(`\nWarnings: ${reportedItems.length}`);
+    // console.warn(JSON.stringify(reportedItems, null, 2));
   } else {
-    console.log("\nWarnings: 0");
+    core.info("\nWarnings: 0");
   }
 }
