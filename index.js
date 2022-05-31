@@ -44,6 +44,7 @@ function printErrorsInfo(reportedItems) {
     byPackage.forEach((val, key) => {
       core.info(`${key} | ${val.join(', ')}`)
     })
+    core.info("")
   } else {
     core.info("No errors");
   }
@@ -64,6 +65,7 @@ function printWarningsInfo(reportedItems) {
     byPackage.forEach((val, key) => {
       core.info(`${key} | ${val.join(', ')}`)
     })
+    core.info("")
   } else {
     core.info("No warnings");
   }
