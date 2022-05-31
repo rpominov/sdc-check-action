@@ -31,8 +31,17 @@ try {
 
 function printErrorsInfo(reportedItems) {
   if (reportedItems.length > 0) {
+    const byPackage = new Map()
+
     reportedItems.forEach(item => {
+      const cur = byPackage.has(item.package) ?  byPackage.get(item.package) : []
+      byPackage.set(item.package, cur.concat([item.metric]))
       core.error(`${item.metric} in ${item.package}: ${item.message}`);
+    })
+
+    core.info("To suppress all errors, add the following to .sdccheckignore:")
+    byPackage.forEach((val, key) => {
+      core.info(`${key} | ${val.join(', ')}`)
     })
   } else {
     core.info("No errors");
