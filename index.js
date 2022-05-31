@@ -36,6 +36,7 @@ function printErrorsInfo(reportedItems) {
     reportedItems.forEach(item => {
       const cur = byPackage.has(item.package) ?  byPackage.get(item.package) : []
       byPackage.set(item.package, cur.concat([item.metric]))
+
       core.error(`${item.metric} in ${item.package}: ${item.message}`);
     })
 
@@ -43,6 +44,7 @@ function printErrorsInfo(reportedItems) {
     byPackage.forEach((val, key) => {
       core.info(`${key} | ${val.join(', ')}`)
     })
+    core.info("\n")
   } else {
     core.info("No errors");
   }
@@ -50,9 +52,20 @@ function printErrorsInfo(reportedItems) {
 
 function printWarningsInfo(reportedItems) {
   if (reportedItems.length > 0) {
+    const byPackage = new Map()
+
     reportedItems.forEach(item => {
+      const cur = byPackage.has(item.package) ?  byPackage.get(item.package) : []
+      byPackage.set(item.package, cur.concat([item.metric]))
+
       core.warning(`${item.metric} in ${item.package}: ${item.message}`);
     })
+
+    core.info("To suppress all warnings, add the following to .sdccheckignore:")
+    byPackage.forEach((val, key) => {
+      core.info(`${key} | ${val.join(', ')}`)
+    })
+    core.info("\n")
   } else {
     core.info("No warnings");
   }
