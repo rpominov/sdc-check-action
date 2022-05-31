@@ -40,11 +40,10 @@ function printErrorsInfo(reportedItems) {
       core.error(`${item.metric} in ${item.package}: ${item.message}`);
     })
 
-    core.info("To suppress all errors, add the following to .sdccheckignore:")
+    core.info("\nTo suppress all errors, add the following to .sdccheckignore:")
     byPackage.forEach((val, key) => {
       core.info(`${key} | ${val.join(', ')}`)
     })
-    core.info("\n")
   } else {
     core.info("No errors");
   }
@@ -61,11 +60,10 @@ function printWarningsInfo(reportedItems) {
       core.warning(`${item.metric} in ${item.package}: ${item.message}`);
     })
 
-    core.info("To suppress all warnings, add the following to .sdccheckignore:")
+    core.info("\nTo suppress all warnings, add the following to .sdccheckignore:")
     byPackage.forEach((val, key) => {
       core.info(`${key} | ${val.join(', ')}`)
     })
-    core.info("\n")
   } else {
     core.info("No warnings");
   }
