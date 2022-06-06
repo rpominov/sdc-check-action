@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    allow:
+      - dependency-type: "direct"
+    reviewers: ["rpominov"]
+    directory: "/"
+    schedule:
+      interval: "weekly"
