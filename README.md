@@ -23,5 +23,5 @@ jobs:
         uses: rpominov/sdc-check-action@v1
 ```
 
-For extra cofiguration, add a `.sdccheckignore` file and an `"sdc-check"` section in `package.json`.
+For extra cofiguration, add a `.sdccheckignore` file and and `"sdc-check"` section in `package.json`.
 See https://github.com/mbalabash/sdc-check#configure
