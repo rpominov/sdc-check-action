@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run sdc-check
-        uses: rpominov/sdc-check-action@v1
+        uses: rpominov/sdc-check-action@v3
 ```
 
 For extra cofiguration, add a `.sdccheckignore` file and and `"sdc-check"` section in `package.json`.
