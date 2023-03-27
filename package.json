@@ -4,6 +4,6 @@
   "type": "module",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "sdc-check": "^1.0.2"
+    "sdc-check": "^1.0.3"
   }
 }
